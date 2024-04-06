@@ -1,0 +1,7 @@
+div.todo-panel {
+  background-color: #1c1c1c;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px auto 100px;
+}

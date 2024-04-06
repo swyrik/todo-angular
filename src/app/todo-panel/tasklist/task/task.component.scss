@@ -1,0 +1,16 @@
+div.task {
+  margin: 0em 0em 0.2em 1em;
+  background-color: #3b3b3b;
+  color: #7082cc;
+  padding: 1em 1em;
+  border-radius: 0.3em;
+  font-family: 'noto sans display', Courier, monospace;
+  font-weight: 600;
+  color: white;
+  &:hover {
+    background-color: #515151;
+  }
+  input[type="checkbox"] {
+    margin-right: 1em;
+  }
+}
