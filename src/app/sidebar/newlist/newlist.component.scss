@@ -1,0 +1,19 @@
+div.newlist {
+  margin: 0em 1em;
+  background-color: transparent;
+  color: #fff;
+  padding: 1em 1em;
+  border-radius: 0.3em;
+  font-family:  "noto sans display", 'Courier New', Courier, monospace;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  span {
+    margin-right: 0.5em;
+  }
+  &:hover{
+    background-color: #515151;
+    box-shadow: inset -4px;
+    cursor: pointer;
+  }
+}

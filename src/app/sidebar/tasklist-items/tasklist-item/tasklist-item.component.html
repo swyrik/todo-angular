@@ -1,0 +1,11 @@
+<div #tasklistitem class="tasklist-item {{activeClass}}"  (click)="displayTaskListItem(tasklist)">
+  <span class="material-symbols-outlined">
+    menu
+  </span>
+  <div>
+    {{tasklist.name | titlecase}}
+  </div>
+  <div class="countdiv">
+    <span class="count">{{tasklist.Tasks.length}}</span>
+  </div>
+</div>

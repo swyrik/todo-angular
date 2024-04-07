@@ -1,0 +1,35 @@
+div.tasklist-item {
+  font-family: 'noto sans display' ,'Courier New', Courier, monospace;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 20px auto 24px;
+  color: white;
+  grid-gap: 1em;
+  align-items: center;
+  padding: 0.5em 0.5em;
+  margin: 1em 0.5em;
+  border-radius: 0em 0.3em 0.3em 0em;
+  border-left: 2px solid transparent;
+  &:hover{
+    background-color: #363636;
+    border-left: 2px solid #788cde;
+  }
+  span.material-symbols-outlined {
+    color: #788cde;
+  }
+  div.countdiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #363636;
+    border-radius: 1em;
+    height: 100%;
+    width: 100%;
+    box-shadow: 1px 1px 3px rgba($color: #fff, $alpha: 0.1), -1px -1px 3px rgba($color: #fff, $alpha: 0.1);
+  }
+}
+
+.active {
+  background-color: #505050 !important;
+  border-left: 2px solid #788cde !important;
+}

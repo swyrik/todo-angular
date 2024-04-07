@@ -1,0 +1,7 @@
+div.sidebar{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px auto 100px;
+  background-color: #212121;
+  height: 100vh;
+}
