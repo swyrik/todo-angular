@@ -12,5 +12,8 @@ div.task {
   }
   input[type="checkbox"] {
     margin-right: 1em;
+    &:checked ~ label {
+      text-decoration: line-through;
+    }
   }
 }

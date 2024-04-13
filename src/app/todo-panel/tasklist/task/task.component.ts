@@ -13,4 +13,12 @@ export class TaskComponent {
 
   @Input() task!: Task;
 
+  taskDone($event: any) {
+    if($event?.target?.checked){
+      this.task.done = true;
+    } else {
+      this.task.done = false;
+    }
+  }
+
 }

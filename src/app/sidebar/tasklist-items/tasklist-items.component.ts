@@ -23,15 +23,15 @@ export class TasklistItemsComponent {
       name: 'learning goals 2024',
       Tasks: [
         {
-          name: 'Task 1',
+          name: 'Task 1 24',
           done: false,
         },
         {
-          name: 'Task 2',
+          name: 'Task 2 24',
           done: false,
         },
         {
-          name: 'Task 3',
+          name: 'Task 3 24',
           done: false,
         },
       ],
