@@ -1,3 +1,4 @@
 @for (tasklist of tasklistitems; track $index) {
-  <app-tasklist-item [tasklist]="tasklist" [activeClass]="activeItem == $index ? 'active' : ''" [index]="$index" (clicked)="onClicked($event)"></app-tasklist-item>
+  <app-tasklist-item [tasklist]="tasklist" [activeClass]="activeItem == $index ? 'active' : ''" [index]="$index" (clicked)="onClicked($event)">
+  </app-tasklist-item>
 }

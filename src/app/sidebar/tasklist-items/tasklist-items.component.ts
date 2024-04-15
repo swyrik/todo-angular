@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import TaskList from '../../Types/tasklist.model';
 import { TasklistItemComponent } from "./tasklist-item/tasklist-item.component";
 import { TaskService } from '../../services/task.service';
@@ -10,11 +10,15 @@ import { TaskService } from '../../services/task.service';
     styleUrl: './tasklist-items.component.scss',
     imports: [TasklistItemComponent]
 })
-export class TasklistItemsComponent {
+export class TasklistItemsComponent  implements OnInit, AfterViewInit{
 
   activeItem! : number;
+  @ViewChildren(TasklistItemComponent) taskListItems!: QueryList<any>;
 
-  constructor(private taskService: TaskService){
+  constructor(private taskService: TaskService, private eleRef: ElementRef){
+
+  }
+  ngOnInit(): void {
 
   }
 
@@ -54,6 +58,18 @@ export class TasklistItemsComponent {
       ],
     }
   ];
+
+  ngAfterViewInit(): void {
+    queueMicrotask(() => {
+      this.taskListItems.forEach((item : TasklistItemComponent, index:number) => {
+        if(index == 0) {
+          let firstItem = this.eleRef.nativeElement.querySelector(`.tasklist-item-${index}`);
+          firstItem.dispatchEvent(new Event('click'));
+        }
+      });
+    })
+  }
+
 
   onClicked($event: number) {
     this.activeItem = $event;
