@@ -67,6 +67,7 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
           firstItem.dispatchEvent(new Event('click'));
         }
       });
+      console.log("queue invoke")
     })
   }
 

@@ -4,3 +4,22 @@ div.title {
   font-family:  "noto sans display", 'Courier New', Courier, monospace;
   font-weight: 900;
 }
+
+
+.header-rename-input{
+  border: none;
+  height: inherit;
+  background-color: transparent;
+  color: #7082cc;
+  font-family:  "noto sans display", 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+  margin: 0.67em 0em;
+  &:focus {
+    border: 1px solid rgba($color: #fff, $alpha: .1);
+  }
+
+  &:active {
+    border: none;
+  }
+}
