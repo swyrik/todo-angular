@@ -36,11 +36,12 @@ export class TaskheaderComponent implements OnInit{
    */
   updateTitle(arg0: string) {
     this.taskService.tasklistitems.forEach(element => {
-      if(element.name = this.title){
+      if(element.name == this.title){
         this.title = arg0;
         element.name = arg0;
       }
     });
+    this.taskService.renderSidePanel();
   }
 
 }

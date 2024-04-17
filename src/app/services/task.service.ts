@@ -9,6 +9,11 @@ export class TaskService {
 
   tasklistitems: TaskList[] = [];
   private taskListSubject = new Subject<TaskList>();
+  private renderSidePanelSubject = new  Subject<TaskList[]>();
+
+  setTaskListItems(tasklistitems: TaskList[]){
+    this.tasklistitems = tasklistitems;
+  }
 
   renderTaskList(taskList: TaskList){
     this.taskListSubject.next(taskList);
@@ -16,6 +21,15 @@ export class TaskService {
 
   getTaskListSubject(){
     return this.taskListSubject
+  }
+
+  renderSidePanel(){
+    console.log(this.tasklistitems);
+    return this.renderSidePanelSubject.next(this.tasklistitems);
+  }
+
+  getRenderSidePanelSubject(){
+    return this.renderSidePanelSubject;
   }
 
   constructor() { }

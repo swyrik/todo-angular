@@ -12,56 +12,63 @@ import { TaskService } from '../../services/task.service';
 })
 export class TasklistItemsComponent  implements OnInit, AfterViewInit{
 
+    tasklistitems: TaskList[] = [
+      {
+        name: 'learning goals 2024',
+        Tasks: [
+          {
+            name: 'Task 1 24',
+            done: false,
+          },
+          {
+            name: 'Task 2 24',
+            done: false,
+          },
+          {
+            name: 'Task 3 24',
+            done: false,
+          },
+        ],
+      },
+      {
+        name: 'learning goals 2023',
+        Tasks: [
+          {
+            name: 'Task 1',
+            done: false,
+          },
+          {
+            name: 'Task 2',
+            done: false,
+          },
+          {
+            name: 'Task 3',
+            done: false,
+          },
+        ],
+      }
+    ];
+
   activeItem! : number;
-  @ViewChildren(TasklistItemComponent) taskListItems!: QueryList<any>;
+  @ViewChildren(TasklistItemComponent) taskListItemsComponent!: QueryList<any>;
+
 
   constructor(private taskService: TaskService, private eleRef: ElementRef){
-
+    this.taskService
+    .getRenderSidePanelSubject()
+    .subscribe(taskListItems => {
+      this.tasklistitems = taskListItems;
+      console.log("render");
+    });
   }
+
   ngOnInit(): void {
-
+    this.taskService.setTaskListItems(this.tasklistitems);
   }
-
-  tasklistitems: TaskList[] = [
-    {
-      name: 'learning goals 2024',
-      Tasks: [
-        {
-          name: 'Task 1 24',
-          done: false,
-        },
-        {
-          name: 'Task 2 24',
-          done: false,
-        },
-        {
-          name: 'Task 3 24',
-          done: false,
-        },
-      ],
-    },
-    {
-      name: 'learning goals 2023',
-      Tasks: [
-        {
-          name: 'Task 1',
-          done: false,
-        },
-        {
-          name: 'Task 2',
-          done: false,
-        },
-        {
-          name: 'Task 3',
-          done: false,
-        },
-      ],
-    }
-  ];
 
   ngAfterViewInit(): void {
     queueMicrotask(() => {
-      this.taskListItems.forEach((item : TasklistItemComponent, index:number) => {
+      this.taskListItemsComponent.forEach((item : TasklistItemComponent, index:number) => {
         if(index == 0) {
           let firstItem = this.eleRef.nativeElement.querySelector(`.tasklist-item-${index}`);
           firstItem.dispatchEvent(new Event('click'));

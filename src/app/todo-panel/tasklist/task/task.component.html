@@ -1,4 +1,22 @@
-<div class="task" title="Tap to view details">
-  <input type="checkbox" (change)="taskDone($event)" [checked]="task.done" />
+<div  class="task" title="Tap to view details" (contextmenu)="taskContextMenuFun($event)">
+  <input #taskInput type="checkbox" (change)="taskDone($event)" [checked]="task.done" />
   <label for="">{{task.name}}</label>
+</div>
+
+<div class="task-contextmenu" #taskContextMenu>
+  <ul>
+    <li (click)="taskComplete(taskInput.checked)">
+      @if (taskInput.checked){
+        <span class="material-symbols-outlined">radio_button_unchecked</span>
+        Mark as incomplete
+      } @else {
+        <span class="material-symbols-outlined">done</span>
+        Mark as complete
+      }
+    </li>
+    <li class="delete" (click)="deleteTask()">
+      <span class="material-symbols-outlined">delete</span>
+      Delete task
+    </li>
+  </ul>
 </div>
