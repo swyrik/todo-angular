@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import Task from '../../Types/task.model';
 import TaskList from '../../Types/tasklist.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-addtask',
@@ -37,7 +38,7 @@ export class AddtaskComponent {
   handleKeyDownEnter(event: KeyboardEvent) {
     if(this.toggleAddTaskFlag && this.newTaskInput.nativeElement.value){
       this.toggleAddTaskFlag = false;
-      this.taskList.Tasks.push({name: this.newTaskInput.nativeElement.value, done: false});
+      this.taskList.Tasks.push({name: this.newTaskInput.nativeElement.value, done: false, id: uuidv4()});
     }
   }
 

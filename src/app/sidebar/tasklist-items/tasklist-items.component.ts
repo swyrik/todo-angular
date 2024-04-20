@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren }
 import TaskList from '../../Types/tasklist.model';
 import { TasklistItemComponent } from "./tasklist-item/tasklist-item.component";
 import { TaskService } from '../../services/task.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
     selector: 'app-tasklist-items',
@@ -14,36 +15,44 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
 
     tasklistitems: TaskList[] = [
       {
+        id: uuidv4(),
         name: 'learning goals 2024',
         Tasks: [
           {
             name: 'Task 1 24',
             done: false,
+            id: uuidv4()
           },
           {
             name: 'Task 2 24',
             done: false,
+            id: uuidv4()
           },
           {
             name: 'Task 3 24',
             done: false,
+            id: uuidv4()
           },
         ],
       },
       {
+        id: uuidv4(),
         name: 'learning goals 2023',
         Tasks: [
           {
             name: 'Task 1',
             done: false,
+            id: uuidv4()
           },
           {
             name: 'Task 2',
             done: false,
+            id: uuidv4()
           },
           {
             name: 'Task 3',
             done: false,
+            id: uuidv4()
           },
         ],
       }

@@ -12,13 +12,17 @@ import { TaskService } from '../../services/task.service';
 export class TaskheaderComponent implements OnInit{
 
   title: string = "no title";
+  id!: string;
   toggleHeaderRenameFlag: boolean = false;
 
   constructor(private taskService: TaskService){
   }
 
   ngOnInit(): void {
-    this.taskService.getTaskListSubject().subscribe((tasks) => {this.title=tasks.name;});
+    this.taskService.getTaskListSubject().subscribe((tasks) => {
+      this.title=tasks.name;
+      this.id = tasks.id;
+    });
   }
 
   @HostListener('window:keydown.esc', ['$event'])
@@ -36,7 +40,7 @@ export class TaskheaderComponent implements OnInit{
    */
   updateTitle(arg0: string) {
     this.taskService.tasklistitems.forEach(element => {
-      if(element.name == this.title){
+      if(element.id == this.id){
         this.title = arg0;
         element.name = arg0;
       }

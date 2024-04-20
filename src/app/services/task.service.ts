@@ -46,7 +46,18 @@ export class TaskService {
 
   }
 
-  removeTaskInTaskList(){
-
+  deleteTaskInTaskList(id: String, taskListId: String) {
+    for(let i = 0; i< this.tasklistitems.length; i++){
+      if(this.tasklistitems[i].id == taskListId){
+        this.tasklistitems[i].Tasks = this.tasklistitems[i].Tasks.filter(task => {
+          if (task.id !== id) {
+            return  true;
+          }
+          return false;
+        })
+        break;
+      }
+    }
+    return this.renderSidePanelSubject.next(this.tasklistitems);
   }
 }

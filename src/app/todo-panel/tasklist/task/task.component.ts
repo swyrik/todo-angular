@@ -1,7 +1,9 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import Task from '../../../Types/task.model';
 import { JsonPipe } from '@angular/common';
 import { TaskcontextmenuService } from '../../../services/taskcontextmenu.service';
+import { TaskService } from '../../../services/task.service';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-task',
@@ -14,10 +16,14 @@ export class TaskComponent {
 
 
   @Input() task!: Task;
+  @Input() taskListId!: String;
+  @Output() deleteTaskId = new EventEmitter<String>();
   @ViewChild('taskContextMenu') taskContextMenuEle!: ElementRef<HTMLDivElement>;
   @ViewChild('taskInput') taskInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private taskContextMenuService: TaskcontextmenuService){
+  constructor(private taskContextMenuService: TaskcontextmenuService,
+    private taskService: TaskService
+  ){
     this.taskContextMenuService.getContextMenuSubject().subscribe(() => {
       this.closeTaskContextMenu();
     });
@@ -31,6 +37,8 @@ export class TaskComponent {
 
   deleteTask() {
     this.closeTaskContextMenu();
+    this.taskService.deleteTaskInTaskList(this.task.id, this.taskListId);
+    this.deleteTaskId.emit(this.task.id);
 
   }
 
