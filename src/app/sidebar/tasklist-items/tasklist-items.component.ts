@@ -67,7 +67,6 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
     .getRenderSidePanelSubject()
     .subscribe(taskListItems => {
       this.tasklistitems = taskListItems;
-      console.log("render");
     });
   }
 
@@ -76,17 +75,24 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+      this.renderFirstItem();
+  }
+
+
+  activeItemDeleted() {
+    this.renderFirstItem();
+  }
+
+  renderFirstItem() {
     queueMicrotask(() => {
-      this.taskListItemsComponent.forEach((item : TasklistItemComponent, index:number) => {
-        if(index == 0) {
+      this.taskListItemsComponent.forEach((item: TasklistItemComponent, index: number) => {
+        if (index == 0) {
           let firstItem = this.eleRef.nativeElement.querySelector(`.tasklist-item-${index}`);
           firstItem.dispatchEvent(new Event('click'));
         }
       });
-      console.log("queue invoke")
-    })
+    });
   }
-
 
   onClicked($event: number) {
     this.activeItem = $event;

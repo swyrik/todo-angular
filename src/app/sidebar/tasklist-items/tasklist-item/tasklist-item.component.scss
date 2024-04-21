@@ -33,3 +33,40 @@ div.tasklist-item {
   background-color: #505050 !important;
   border-left: 2px solid #788cde !important;
 }
+
+div.tasklist-contextmenu{
+  display: none;
+}
+
+div.tasklist-contextmenu {
+  display: none;
+  box-shadow: 0px 1px 5px rgba($color: #fff, $alpha: 0.1);
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 0.2em;
+  border: 1px solid rgba($color: #fff, $alpha: 0.1);
+  background-color: #1c1c1c;
+  ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    li.delete{
+      color: indianred !important;
+    }
+    li{
+      span{
+        padding-right: 0.5em;
+      }
+      cursor: pointer;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding: 0.5em 1em;
+      color: whitesmoke;
+      &:hover {
+        background-color: #363636;
+        border-radius: 0.2em;
+      }
+    }
+  }
+}

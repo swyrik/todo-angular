@@ -24,7 +24,6 @@ export class TaskService {
   }
 
   renderSidePanel(){
-    console.log(this.tasklistitems);
     return this.renderSidePanelSubject.next(this.tasklistitems);
   }
 
@@ -38,8 +37,9 @@ export class TaskService {
     this.tasklistitems.push(newTaskList);
   }
 
-  deleteTaskList(index: number) {
-    this.tasklistitems.splice(index, 1);
+  deleteTaskList(id: String) {
+    this.tasklistitems = this.tasklistitems.filter(taskList => taskList.id != id);
+    this.renderSidePanelSubject.next(this.tasklistitems);
   }
 
   addTaskInTaskList(){
