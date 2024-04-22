@@ -25,6 +25,7 @@ export class AddtaskComponent {
   }
 
   toggleAddTask(event: any){
+    if(this.taskList.Tasks.length === 0 && this.taskList.id == "") return;
     this.toggleAddTaskFlag = true;
     this.newTaskInput!.nativeElement.focus();
   }

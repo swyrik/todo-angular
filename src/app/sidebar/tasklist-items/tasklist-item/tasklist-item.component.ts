@@ -61,6 +61,7 @@ export class TasklistItemComponent {
     if(this.taskListItem.nativeElement.classList.contains("active")) {
       this.activeItemDeleted.emit(this.taskListItem.nativeElement.id);
     }
+    $event.preventDefault();
     $event.stopPropagation();
   }
 

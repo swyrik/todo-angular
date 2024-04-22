@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TaskheaderComponent } from "./taskheader/taskheader.component";
 import { TasklistComponent } from "./tasklist/tasklist.component";
 import { AddtaskComponent } from "./addtask/addtask.component";
+import { TaskService } from '../services/task.service';
 
 @Component({
     selector: 'app-todo-panel',
@@ -11,5 +12,10 @@ import { AddtaskComponent } from "./addtask/addtask.component";
     imports: [TaskheaderComponent, TasklistComponent, AddtaskComponent]
 })
 export class TodoPanelComponent {
+
+  renderNothing : boolean = false;
+
+  constructor(private taskService: TaskService){
+  }
 
 }

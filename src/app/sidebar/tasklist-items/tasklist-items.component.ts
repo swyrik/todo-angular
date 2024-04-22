@@ -84,6 +84,7 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
   }
 
   renderFirstItem() {
+    if(this.tasklistitems.length == 0) return;
     queueMicrotask(() => {
       this.taskListItemsComponent.forEach((item: TasklistItemComponent, index: number) => {
         if (index == 0) {

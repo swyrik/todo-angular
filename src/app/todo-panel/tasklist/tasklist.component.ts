@@ -19,7 +19,7 @@ export class TasklistComponent implements OnInit{
 
   ngOnInit(): void {
     this.taskService.getTaskListSubject().subscribe((tasks) => {
-      this.tasks=tasks.Tasks;
+      this.tasks = tasks.Tasks ?? [];
       this.taskListId = tasks.id;
     });
   }

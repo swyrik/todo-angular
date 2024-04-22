@@ -40,6 +40,14 @@ export class TaskService {
   deleteTaskList(id: String) {
     this.tasklistitems = this.tasklistitems.filter(taskList => taskList.id != id);
     this.renderSidePanelSubject.next(this.tasklistitems);
+    if(this.tasklistitems.length == 0){
+      console.log("last one");
+      this.renderTaskList({
+        name: "",
+        id: "",
+        Tasks: []
+      });
+    }
   }
 
   addTaskInTaskList(){
