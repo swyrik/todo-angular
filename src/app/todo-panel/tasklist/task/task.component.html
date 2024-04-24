@@ -3,7 +3,7 @@
   <label for="">{{task.name}}</label>
 </div>
 
-<div class="task-contextmenu" #taskContextMenu>
+<div class="task-contextmenu animate__animated animate__fadeInDown animate__faster" #taskContextMenu>
   <ul>
     <li (click)="taskComplete(taskInput.checked)">
       @if (taskInput.checked){
