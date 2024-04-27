@@ -3,7 +3,8 @@ import Task from '../../../Types/task.model';
 import { JsonPipe } from '@angular/common';
 import { TaskcontextmenuService } from '../../../services/taskcontextmenu.service';
 import { TaskService } from '../../../services/task.service';
-// import { EventEmitter } from 'stream';
+
+
 
 @Component({
   selector: 'app-task',
@@ -14,12 +15,12 @@ import { TaskService } from '../../../services/task.service';
 })
 export class TaskComponent {
 
-
   @Input() task!: Task;
   @Input() taskListId!: String;
   @Output() deleteTaskId = new EventEmitter<String>();
   @ViewChild('taskContextMenu') taskContextMenuEle!: ElementRef<HTMLDivElement>;
   @ViewChild('taskInput') taskInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('taskInputImportant') taskInputImportant!: ElementRef<HTMLInputElement>;
 
   constructor(private taskContextMenuService: TaskcontextmenuService,
     private taskService: TaskService
@@ -42,7 +43,7 @@ export class TaskComponent {
 
   }
 
-  taskComplete(checked: boolean) {
+  menuTaskComplete(checked: boolean) {
     this.closeTaskContextMenu();
     this.taskInput.nativeElement.checked = !checked;
     this.task.done = !checked;
@@ -53,6 +54,20 @@ export class TaskComponent {
       this.task.done = true;
     } else {
       this.task.done = false;
+    }
+  }
+
+  menuTaskImportant(checked: boolean) {
+    this.closeTaskContextMenu();
+    this.taskInput.nativeElement.checked = !checked;
+    this.task.important = !checked;
+  }
+
+  taskImportant($event: any) {
+    if($event?.target?.checked){
+      this.task.important = true;
+    } else {
+      this.task.important = false;
     }
   }
 

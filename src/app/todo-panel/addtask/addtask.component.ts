@@ -39,7 +39,7 @@ export class AddtaskComponent {
   handleKeyDownEnter(event: KeyboardEvent) {
     if(this.toggleAddTaskFlag && this.newTaskInput.nativeElement.value){
       this.toggleAddTaskFlag = false;
-      this.taskList.Tasks.push({name: this.newTaskInput.nativeElement.value, done: false, id: uuidv4()});
+      this.taskList.Tasks.push({name: this.newTaskInput.nativeElement.value, done: false,important: false, id: uuidv4(), date: new Date()});
     }
   }
 

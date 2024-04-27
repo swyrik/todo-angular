@@ -1,26 +1,34 @@
 div.task {
   margin: 0em 0em 0.2em 1em;
-  background-color: #2a2a2a;
+  background-color: #141414;
   color: #7082cc;
   padding: 1em 1em;
   border-radius: 0.3em;
   font-family: 'noto sans display', Courier, monospace;
   font-weight: 600;
   color: white;
+  display: grid;
+  grid-template-columns: 35px auto 35px;
+  border: 1px solid rgba($color: #fff, $alpha: 0.1);
   &:hover {
-    background-color: #363636;
+    background-color: #242424;
   }
-  input[type="checkbox"] {
+  input[type="checkbox"].done {
     margin-right: 1em;
     &:checked ~ label {
       text-decoration: line-through;
+      opacity: 0.4;
     }
+  }
+  label {
+    align-content: center;
   }
 }
 
 
 div.task-contextmenu {
   display: none;
+  font-family: 'noto sans display' ,'Courier New', Courier, monospace;
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 0.5em;
@@ -46,13 +54,66 @@ div.task-contextmenu {
       padding: 0.5em 1em;
       color: whitesmoke;
       &:hover {
-        background-color: #363636;
+        background-color: #3636369d;
         border-radius: 0.2em;
       }
     }
   }
 }
 
-// .animate__animated.animate__fadeInDown {
-//   --animate-duration: 0.2s;
-// }
+input[type="checkbox"].done {
+  /* Remove default checkbox appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Create a custom checkbox */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+/* Style for checked checkbox */
+input[type="checkbox"].done:checked {
+  border-color: #7082cc;
+  background-color: #7082cc;
+  border: 2px solid #7082cc;
+}
+
+/* Style for checked checkbox after element (checkmark) */
+input[type="checkbox"].done:checked::after {
+  content: "\2714";
+  font-size: 12px;
+  color: #fff;
+  position: relative;
+  top: -1px;
+  left: 3px;
+}
+
+input[type="checkbox"].important {
+  /* Remove default checkbox appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+}
+
+input[type="checkbox"].important::before {
+  content: "\2606";
+  font-size: 28px;
+  color: white;
+  position: relative;
+  top: -10px;
+}
+
+/* Style for checked checkbox after element (checkmark) */
+input[type="checkbox"].important:checked::before {
+  content: "\2605";
+  font-size: 28px;
+  color: #7082cc;
+  text-shadow: 0 0 1.7rem #91acff;
+}

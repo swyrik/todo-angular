@@ -21,17 +21,23 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
           {
             name: 'Task 1 24',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
           {
             name: 'Task 2 24',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
           {
             name: 'Task 3 24',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
         ],
       },
@@ -42,17 +48,23 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
           {
             name: 'Task 1',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
           {
             name: 'Task 2',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
           {
             name: 'Task 3',
             done: false,
-            id: uuidv4()
+            important: false,
+            id: uuidv4(),
+            date: new Date()
           },
         ],
       }
