@@ -88,4 +88,9 @@ export class TaskComponent {
     this.taskContextMenuEle.nativeElement.style.top = $event.pageY+"px";
   }
 
+  showTaskDetails($event: any) {
+    if($event.target.classList.contains("done") || $event.target.classList.contains("important") ) return;
+    this.taskService.getShowTaskDetailsSubject().next(this.task);
+  }
+
 }

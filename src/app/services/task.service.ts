@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import TaskList from '../Types/tasklist.model';
 import { BehaviorSubject, Subject } from 'rxjs';
+import Task from '../Types/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class TaskService {
   tasklistitems: TaskList[] = [];
   private taskListSubject = new Subject<TaskList>();
   private renderSidePanelSubject = new  Subject<TaskList[]>();
+  private showTaskDetailsSubject = new Subject<Task>();
 
   setTaskListItems(tasklistitems: TaskList[]){
     this.tasklistitems = tasklistitems;
@@ -67,5 +69,9 @@ export class TaskService {
       }
     }
     return this.renderSidePanelSubject.next(this.tasklistitems);
+  }
+
+  getShowTaskDetailsSubject(){
+    return this.showTaskDetailsSubject;
   }
 }

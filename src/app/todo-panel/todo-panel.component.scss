@@ -2,10 +2,29 @@ div.todo-panel {
   background-color: #090909;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 100px auto 100px;
+  grid-template-columns: auto;
   padding-left: 2em;
 }
+
+div.todo-panel:has(div.todo-detail.active) {
+  grid-template-columns: auto 400px;
+}
+
+div.main {
+  background-color: #090909;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 100px auto 100px;
+}
+
+div.todo-detail {
+  height: 100vh;
+  border-left: 1px solid #ffffff14;
+  container-name: todo-detail;
+  transition: 1px ease-in-out all;
+}
+
+
 
 div.tasklist {
   overflow-y: scroll;
