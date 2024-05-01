@@ -12,7 +12,7 @@ import { TaskcontextmenuService } from '../../../services/taskcontextmenu.servic
   styleUrl: './tasklist-item.component.scss'
 })
 
-export class TasklistItemComponent {
+export class TasklistItemComponent{
 
   @Input() tasklist!: TaskList;
   @Input() index!: number;

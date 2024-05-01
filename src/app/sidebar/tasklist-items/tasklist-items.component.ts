@@ -79,6 +79,7 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
     .getRenderSidePanelSubject()
     .subscribe(taskListItems => {
       this.tasklistitems = taskListItems;
+      this.taskService.setTaskListItems(this.tasklistitems);
     });
   }
 

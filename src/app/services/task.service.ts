@@ -56,7 +56,7 @@ export class TaskService {
 
   }
 
-  deleteTaskInTaskList(id: String, taskListId: String) {
+  deleteTaskInTaskList(id: String, taskListId?: String) {
     for(let i = 0; i< this.tasklistitems.length; i++){
       if(this.tasklistitems[i].id == taskListId){
         this.tasklistitems[i].Tasks = this.tasklistitems[i].Tasks.filter(task => {
@@ -66,6 +66,13 @@ export class TaskService {
           return false;
         })
         break;
+      } else {
+        this.tasklistitems[i].Tasks = this.tasklistitems[i].Tasks.filter(task => {
+          if (task.id !== id) {
+            return  true;
+          }
+          return false;
+        });
       }
     }
     return this.renderSidePanelSubject.next(this.tasklistitems);

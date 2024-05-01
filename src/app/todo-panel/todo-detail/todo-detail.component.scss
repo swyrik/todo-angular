@@ -149,10 +149,134 @@ div.content {
 
     input[type="date"]::-webkit-calendar-picker-indicator {
       display:block;
-      
+
   }
 
 
+  }
+
+  div.steps{
+
+    div.add-step-span {
+      cursor: pointer;
+      background-color: #141414;
+      display: flex;
+      align-items: center;
+      color: #7082cc;
+      width: 100%;
+      padding: 1em 1em;
+      span {
+        margin-right: 0.3em;
+      }
+    }
+    div.add-step-input{
+      display: grid;
+      grid-template-columns: 50px  auto;
+      background-color: #141414;
+      height: 125%;
+      input[type="text"].new-step {
+        cursor: pointer;
+        background-color: #141414;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        padding: 1em 1em;
+        border: 1px solid transparent;
+        width: 80%;
+        &:focus{
+          outline: none;
+          border-top: 1px solid #ffffff1a;
+        }
+      }
+      input[type="checkbox"].step-done {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: red;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: #141414;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        color: #fff;
+        border: 1px solid #fff;
+        width: 15px;
+        height: 15px;
+        &:focus{
+          outline: none;
+          border-top: 1px solid #ffffff1a;
+        }
+      }
+      /* Style for checked checkbox */
+      input[type="checkbox"].step-done:checked {
+        border-color: #7082cc;
+        background-color: #7082cc;
+        border: 2px solid #7082cc;
+      }
+
+      /* Style for checked checkbox after element (checkmark) */
+      input[type="checkbox"].step-done:checked::after {
+        content: "\2714";
+        font-size: 12px;
+        color: #fff;
+        position: relative;
+        top: -3px;
+        left: 1px;
+      }
+    }
+
+    div.step{
+      display: grid;
+      grid-template-columns: 50px  auto;
+      background-color: #141414;
+      height: 125%;
+      padding: 1em 1em;
+      input[type="checkbox"].step-done {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: red;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: #141414;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        color: #fff;
+        border: 1px solid #fff;
+        width: 15px;
+        height: 15px;
+        &:focus{
+          outline: none;
+          border-top: 1px solid #ffffff1a;
+        }
+      }
+      /* Style for checked checkbox */
+      input[type="checkbox"].step-done:checked {
+        border-color: #7082cc;
+        background-color: #7082cc;
+        border: 2px solid #7082cc;
+      }
+
+      input[type="checkbox"].step-done:checked ~ label  {
+        text-decoration: line-through;
+        opacity: 0.4;
+      }
+
+      /* Style for checked checkbox after element (checkmark) */
+      input[type="checkbox"].step-done:checked::after {
+        content: "\2714";
+        font-size: 12px;
+        color: #fff;
+        position: relative;
+        top: -3px;
+        left: 1px;
+      }
+      label {
+        border-bottom: 1px solid #ffffff1a;
+      }
+    }
   }
 }
 

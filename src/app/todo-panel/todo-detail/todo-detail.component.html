@@ -11,6 +11,24 @@
       <label for="">{{task.name}}</label>
       <input #taskInputImportant type="checkbox" class="important" title="Mark as important" (change)="taskImportantTD($event)" [checked]="task.important" />
     </div>
+    <div class="steps" (click)="toggleAddStep($event)">
+      @for(step of task.steps; track $index){
+        <div class="step">
+          <input #stepDone type="checkbox" class="step-done" (change)="stepDoneTD($event, step)" [checked]="step.done" />
+          <label for="">{{step.name}}</label>
+        </div>
+      }
+      @if(!toggleAddStepFlag){
+        <div class="add-step-span">
+          <span class="material-symbols-outlined">add</span> Add a step
+        </div>
+      } @else {
+        <div class="add-step-input">
+          <input type="checkbox" class="step-done" />
+          <input #stepInput class="new-step" type="text"/>
+        </div>
+      }
+    </div>
     <div class="duedate">
       <label>Add due date</label>
       <input name="duedate" type="date" title="Add due date" id="duedate" [(ngModel)]="task.dueDate"/>
@@ -23,10 +41,10 @@
     <div class="create-date">
       Created on {{task.date | date:'fullDate'}}
     </div>
-    <div class="delete">
+    <div class="delete" (click)="deleteTask($event)">
       <span class="material-symbols-outlined">
         delete
-        </span>
+      </span>
     </div>
   </div>
 </div>

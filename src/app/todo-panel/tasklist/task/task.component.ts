@@ -40,7 +40,6 @@ export class TaskComponent {
     this.closeTaskContextMenu();
     this.taskService.deleteTaskInTaskList(this.task.id, this.taskListId);
     this.deleteTaskId.emit(this.task.id);
-
   }
 
   menuTaskComplete(checked: boolean) {
@@ -74,9 +73,6 @@ export class TaskComponent {
   @HostListener('window:keydown.esc', ['$event'])
   handleKeyDownEsc(event: KeyboardEvent) {
     this.taskContextMenuEle.nativeElement.style.display = "none";
-  }
-
-  details($event: MouseEvent) {
   }
 
   taskContextMenuFun($event: MouseEvent) {

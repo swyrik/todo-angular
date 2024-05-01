@@ -1,8 +1,10 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import Task from '../../Types/task.model';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
+import Step from '../../Types/step.model';
 
 @Component({
   selector: 'app-todo-detail',
@@ -18,6 +20,13 @@ export class TodoDetailComponent {
 
   @ViewChild('todo-detail')
   todoDetail!: ElementRef<HTMLDivElement>;
+  toggleAddStepFlag: boolean = false;
+
+  @ViewChild('stepInput')
+  stepInputField!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('stepDone')
+  stepDoneField!: ElementRef<HTMLInputElement>;
 
   constructor(private taskService: TaskService) {}
 
@@ -39,6 +48,40 @@ export class TodoDetailComponent {
     } else {
       this.task.done = false;
     }
+  }
+
+  toggleAddStep(event: any){
+    this.toggleAddStepFlag = true;
+    this.stepInputField!.nativeElement.focus();
+  }
+
+  stepDoneTD($event: any, step: Step) {
+    if($event?.target?.checked){
+      step.done = true;
+    } else {
+      step.done = false;
+    }
+  }
+
+  @HostListener('window:keydown.esc', ['$event'])
+  handleKeyDownEsc(event: KeyboardEvent) {
+    this.toggleAddStepFlag = false;
+  }
+
+  @HostListener('window:keydown.enter', ['$event'])
+  handleKeyDownEnter(event: KeyboardEvent) {
+    if(this.stepInputField.nativeElement.value != ''){
+      if(typeof this.task.steps == "undefined") {
+        this.task.steps = [{id: uuidv4(), name: this.stepInputField.nativeElement.value,  done: false}];
+      } else {
+        this.task.steps?.push({id: uuidv4(), name: this.stepInputField.nativeElement.value,  done: false})
+      }
+      this.toggleAddStepFlag = false;
+    }
+  }
+
+  deleteTask($event : any) {
+    this.taskService.deleteTaskInTaskList(this.task.id);
   }
 
 }
