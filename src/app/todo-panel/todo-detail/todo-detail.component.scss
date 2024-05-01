@@ -12,43 +12,171 @@ div.close {
   display: flex;
   justify-content: right;
   align-self: center;
-  span{
+
+  span {
     padding: 0.5em 0.5em;
     cursor: pointer;
-    &:active{
+
+    &:active {
       opacity: 0.5;
     }
   }
 }
 
-div.content{
+div.content {
   padding: 0.5em 0.5em;
-  div.task-detail{
+
+  div.task-detail {
     background-color: #141414;
     border-radius: 3px;
     padding: 1em;
+    font-family: 'noto sans display', Courier, monospace;
+    font-weight: 600;
+    color: white;
+    display: grid;
+    grid-template-columns: 35px auto 35px;
+    input[type="checkbox"].done {
+      margin-right: 1em;
+      &:checked ~ label {
+        text-decoration: line-through;
+        opacity: 0.4;
+      }
+    }
+    label {
+      align-content: center;
+    }
+    input[type="checkbox"].done {
+      /* Remove default checkbox appearance */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      /* Create a custom checkbox */
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s ease-in-out;
+    }
+
+    /* Style for checked checkbox */
+    input[type="checkbox"].done:checked {
+      border-color: #7082cc;
+      background-color: #7082cc;
+      border: 2px solid #7082cc;
+    }
+
+    /* Style for checked checkbox after element (checkmark) */
+    input[type="checkbox"].done:checked::after {
+      content: "\2714";
+      font-size: 12px;
+      color: #fff;
+      position: relative;
+      top: -1px;
+      left: 3px;
+    }
+
+    input[type="checkbox"].important {
+      /* Remove default checkbox appearance */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+    }
+
+    input[type="checkbox"].important::before {
+      content: "\2606";
+      font-size: 28px;
+      color: white;
+      position: relative;
+      top: -10px;
+    }
+
+    /* Style for checked checkbox after element (checkmark) */
+    input[type="checkbox"].important:checked::before {
+      content: "\2605";
+      font-size: 28px;
+      color: #7082cc;
+      text-shadow: 0 0 1.7rem #91acff;
+    }
+  }
+
+  div.description {
+    margin-top: 1em;
+
+    textarea {
+      background-color: #141414;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 1em;
+      font-family: 'noto sans display', 'Courier New', Courier, monospace;
+      border: 1px solid transparent;
+
+      &:focus {
+        outline: none;
+        color: white;
+        border: 1px solid #ffffff1a;
+      }
+    }
+  }
+
+  div.duedate {
+    padding-top: 2em;
+    border-top: 1px solid #ffffff1a;
+    label{
+      padding: 1em;
+    }
+
+    input[type="date"], input[type="text"] {
+      color-scheme: dark;
+      background-color: #141414;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 1em;
+      font-family: 'noto sans display', 'Courier New', Courier, monospace;
+      border: 1px solid transparent;
+
+      &:focus {
+        outline: none;
+        color: white;
+        border: 1px solid #ffffff1a;
+      }
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      display:block;
+      
+  }
+
 
   }
 }
 
-div.footer{
+div.footer {
   div.create-date {
     height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  div.delete{
+
+  div.delete {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    span{
-      &:active{
+
+    span {
+      &:active {
         opacity: 0.5;
       }
     }
   }
+
   display: grid;
   grid-template-columns: auto 50px;
   grid-template-rows: auto;

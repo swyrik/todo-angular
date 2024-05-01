@@ -17,6 +17,7 @@ div.title {
   margin: 0.67em 0em;
   &:focus {
     border: 1px solid rgba($color: #fff, $alpha: .1);
+    outline: none;
   }
 
   &:active {

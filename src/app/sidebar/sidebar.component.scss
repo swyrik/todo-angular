@@ -1,8 +1,15 @@
 div.sidebar{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 80px auto 100px;
+  grid-template-rows: 80px max-content auto 100px;
   background-color: #09090b;
   height: 100vh;
   border-right: 1px solid rgba($color: #fff, $alpha: 0.1);
+}
+div.grouped-tasks {
+  border-bottom: 1px solid #ffffff1a;
+}
+
+div.tasklist-items{
+  border-bottom: 1px solid #ffffff1a;
 }
