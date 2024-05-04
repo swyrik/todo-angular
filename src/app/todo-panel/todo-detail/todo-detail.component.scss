@@ -1,3 +1,5 @@
+@mixin center-flex($jc: center, $ai: center) {display: flex;justify-content: $jc;align-items: $ai;}
+
 div.main {
   display: grid;
   grid-template-columns: 1fr;
@@ -9,14 +11,11 @@ div.main {
 }
 
 div.close {
-  display: flex;
-  justify-content: right;
+  @include center-flex(right, normal);
   align-self: center;
-
   span {
     padding: 0.5em 0.5em;
     cursor: pointer;
-
     &:active {
       opacity: 0.5;
     }
@@ -46,12 +45,10 @@ div.content {
       align-content: center;
     }
     input[type="checkbox"].done {
-      /* Remove default checkbox appearance */
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
 
-      /* Create a custom checkbox */
       width: 20px;
       height: 20px;
       border: 2px solid #ccc;
@@ -60,14 +57,12 @@ div.content {
       transition: border-color 0.2s ease-in-out;
     }
 
-    /* Style for checked checkbox */
     input[type="checkbox"].done:checked {
       border-color: #7082cc;
       background-color: #7082cc;
       border: 2px solid #7082cc;
     }
 
-    /* Style for checked checkbox after element (checkmark) */
     input[type="checkbox"].done:checked::after {
       content: "\2714";
       font-size: 12px;
@@ -78,7 +73,6 @@ div.content {
     }
 
     input[type="checkbox"].important {
-      /* Remove default checkbox appearance */
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
@@ -94,7 +88,6 @@ div.content {
       top: -10px;
     }
 
-    /* Style for checked checkbox after element (checkmark) */
     input[type="checkbox"].important:checked::before {
       content: "\2605";
       font-size: 28px;
@@ -150,17 +143,13 @@ div.content {
     input[type="date"]::-webkit-calendar-picker-indicator {
       display:block;
     }
-
-
   }
 
   div.steps{
-
     div.add-step-span {
       cursor: pointer;
       background-color: #141414;
-      display: flex;
-      align-items: center;
+      @include center-flex(flex-start, center);
       color: #7082cc;
       width: 100%;
       padding: 1em 1em;
@@ -174,22 +163,19 @@ div.content {
       background-color: #141414;
       height: 125%;
       span {
-        align-self: center;
-        justify-self: flex-end;
+        place-self: center flex-end;
         opacity: 0.6;
       }
       input[type="text"].new-step {
         cursor: pointer;
         background-color: #141414;
-        display: flex;
-        align-items: center;
+        @include center-flex(normal, center);
         color: #fff;
         padding: 1em 1em;
         border: 1px solid transparent;
         width: 80%;
         &:focus{
           outline: none;
-          // border-top: 1px solid #ffffff1a;
         }
       }
     }
@@ -208,8 +194,7 @@ div.content {
         border-radius: 50%;
         cursor: pointer;
         background-color: #141414;
-        display: flex;
-        align-self: center;
+        @include center-flex();
         justify-self: center;
         color: #fff;
         border: 1px solid #fff;
@@ -250,17 +235,11 @@ div.footer {
   grid-template-rows: auto;
   border-top: 1px solid #ffffff1a;
   div.create-date {
-    height: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-flex();
   }
   div.delete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-flex();
     cursor: pointer;
-
     span {
       &:active {
         opacity: 0.5;
