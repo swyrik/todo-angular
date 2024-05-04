@@ -11,6 +11,7 @@ import Step from '../../Types/step.model';
   standalone: true,
   imports: [ DatePipe, FormsModule],
   templateUrl: './todo-detail.component.html',
+  styles: ['div.main { display: grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px; color: white; font-family: \'noto sans display\', \'Courier New\', Courier, monospace;font-size: smaller; height: 100vh;  }'],
   styleUrl: './todo-detail.component.scss'
 })
 export class TodoDetailComponent {
