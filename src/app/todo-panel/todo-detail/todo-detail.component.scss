@@ -18,7 +18,7 @@ div.content {
     background-color: #141414;
     border-radius: 3px;
     padding: 1em;
-    font-family: 'noto sans display', Courier, monospace;
+    font-family: 'noto sans display', 'Courier new';
     font-weight: 600;
     color: white;
     display: grid;
@@ -43,9 +43,7 @@ div.content {
       border: 2px solid #ccc;
       border-radius: 12px;
       outline: none;
-      transition: border-color 0.2s ease-in-out;
       &:checked {
-        border-color: #7082cc;
         background-color: #7082cc;
         border: 2px solid #7082cc;
         &::after{
@@ -53,8 +51,7 @@ div.content {
           font-size: 12px;
           color: #fff;
           position: relative;
-          top: -1px;
-          left: 3px;
+          inset: -1px 0px 0px 3px;
         }
       }
     }
@@ -90,7 +87,7 @@ div.content {
       border: none;
       width: 100%;
       padding: 1em;
-      font-family: 'noto sans display', 'Courier New', Courier, monospace;
+      font-family: 'noto sans display', 'Courier New';
       border: 1px solid transparent;
 
       &:focus {
@@ -113,7 +110,7 @@ div.content {
       color: white;
       width: 100%;
       padding: 1em;
-      font-family: 'noto sans display', 'Courier New', Courier, monospace;
+      font-family: 'noto sans display', 'Courier New';
       border: 1px solid transparent;
       &:focus {
         outline: none;
@@ -187,8 +184,6 @@ div.content {
             font-size: 12px;
             color: #fff;
             position: relative;
-            top: -3px;
-            left: 1px;
           }
           & ~ label {
             text-decoration: line-through;
