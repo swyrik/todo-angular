@@ -86,7 +86,7 @@ export class TaskComponent {
 
   showTaskDetails($event: any) {
     if($event.target.classList.contains("done") || $event.target.classList.contains("important") ) return;
-    this.taskService.getShowTaskDetailsSubject().next(this.task);
+    this.taskService.getShowTaskDetailsSubject().next({task :this.task, action: "show"} );
   }
 
 }

@@ -31,7 +31,7 @@ export class TodoDetailComponent {
   constructor(private taskService: TaskService) {}
 
   closeTodoDetail($event: MouseEvent) {
-    this.taskService.getShowTaskDetailsSubject().next({name:"", id: "", done:false, important: false,  date: new Date()});
+    this.taskService.getShowTaskDetailsSubject().next({task: this.task, action: "hide"});
   }
 
   taskImportantTD($event: any) {
@@ -82,6 +82,7 @@ export class TodoDetailComponent {
 
   deleteTask($event : any) {
     this.taskService.deleteTaskInTaskList(this.task.id);
+    this.taskService.getShowTaskDetailsSubject().next({task: this.task, action: "delete"});
   }
 
 }

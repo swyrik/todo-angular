@@ -11,7 +11,7 @@
       <label for="">{{task.name}}</label>
       <input #taskInputImportant type="checkbox" class="important" title="Mark as important" (change)="taskImportantTD($event)" [checked]="task.important" />
     </div>
-    <div class="steps" (click)="toggleAddStep($event)">
+    <div class="steps">
       @for(step of task.steps; track $index){
         <div class="step">
           <input #stepDone type="checkbox" class="step-done" (change)="stepDoneTD($event, step)" [checked]="step.done" />
@@ -19,12 +19,12 @@
         </div>
       }
       @if(!toggleAddStepFlag){
-        <div class="add-step-span">
+        <div class="add-step-span" (click)="toggleAddStep($event)">
           <span class="material-symbols-outlined">add</span> Add a step
         </div>
       } @else {
         <div class="add-step-input">
-          <input type="checkbox" class="step-done" />
+          <span class="material-symbols-outlined">add</span>
           <input #stepInput class="new-step" type="text"/>
         </div>
       }

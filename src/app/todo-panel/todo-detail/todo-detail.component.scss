@@ -174,6 +174,11 @@ div.content {
       grid-template-columns: 50px  auto;
       background-color: #141414;
       height: 125%;
+      span {
+        align-self: center;
+        justify-self: flex-end;
+        opacity: 0.6;
+      }
       input[type="text"].new-step {
         cursor: pointer;
         background-color: #141414;
@@ -185,7 +190,7 @@ div.content {
         width: 80%;
         &:focus{
           outline: none;
-          border-top: 1px solid #ffffff1a;
+          // border-top: 1px solid #ffffff1a;
         }
       }
       input[type="checkbox"].step-done {

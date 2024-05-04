@@ -16,16 +16,25 @@ import Task from '../Types/task.model';
 export class TodoPanelComponent {
 
   @ViewChild('todoDetail') taskInput!: ElementRef<HTMLDivElement>;
+
+  @ViewChild(TasklistComponent)
+  taskListComponent!: TasklistComponent;
+
   todoDetailClass:string = "todo-detail";
+
   task!: Task;
 
   constructor(private taskService: TaskService){
-    this.taskService.getShowTaskDetailsSubject().subscribe(task => {
-      if(task.id == "") {
-        this.todoDetailClass = "todo-detail";
-      } else{
+    this.taskService.getShowTaskDetailsSubject().subscribe(taskAction => {
+
+      if(taskAction.action == "show"){
         this.todoDetailClass = "todo-detail active";
-        this.task = task;
+        this.task = taskAction.task;
+      } else if (taskAction.action == "hide") {
+        this.todoDetailClass = "todo-detail";
+      } else if (taskAction.action == "delete") {
+        this.todoDetailClass = "todo-detail";
+        this.taskListComponent.deleteTask(taskAction.task.id);
       }
     });
   }

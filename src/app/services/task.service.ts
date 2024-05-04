@@ -11,7 +11,7 @@ export class TaskService {
   tasklistitems: TaskList[] = [];
   private taskListSubject = new Subject<TaskList>();
   private renderSidePanelSubject = new  Subject<TaskList[]>();
-  private showTaskDetailsSubject = new Subject<Task>();
+  private showTaskDetailsSubject = new Subject<{task : Task, action: string}>();
 
   setTaskListItems(tasklistitems: TaskList[]){
     this.tasklistitems = tasklistitems;
