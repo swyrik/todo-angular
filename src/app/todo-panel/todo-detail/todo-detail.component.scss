@@ -149,8 +149,7 @@ div.content {
 
     input[type="date"]::-webkit-calendar-picker-indicator {
       display:block;
-
-  }
+    }
 
 
   }
@@ -193,42 +192,6 @@ div.content {
           // border-top: 1px solid #ffffff1a;
         }
       }
-      input[type="checkbox"].step-done {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-color: red;
-        border-radius: 50%;
-        cursor: pointer;
-        background-color: #141414;
-        display: flex;
-        align-self: center;
-        justify-self: center;
-        color: #fff;
-        border: 1px solid #fff;
-        width: 15px;
-        height: 15px;
-        &:focus{
-          outline: none;
-          border-top: 1px solid #ffffff1a;
-        }
-      }
-      /* Style for checked checkbox */
-      input[type="checkbox"].step-done:checked {
-        border-color: #7082cc;
-        background-color: #7082cc;
-        border: 2px solid #7082cc;
-      }
-
-      /* Style for checked checkbox after element (checkmark) */
-      input[type="checkbox"].step-done:checked::after {
-        content: "\2714";
-        font-size: 12px;
-        color: #fff;
-        position: relative;
-        top: -3px;
-        left: 1px;
-      }
     }
 
     div.step{
@@ -256,27 +219,23 @@ div.content {
           outline: none;
           border-top: 1px solid #ffffff1a;
         }
-      }
-      /* Style for checked checkbox */
-      input[type="checkbox"].step-done:checked {
-        border-color: #7082cc;
-        background-color: #7082cc;
-        border: 2px solid #7082cc;
-      }
-
-      input[type="checkbox"].step-done:checked ~ label  {
-        text-decoration: line-through;
-        opacity: 0.4;
-      }
-
-      /* Style for checked checkbox after element (checkmark) */
-      input[type="checkbox"].step-done:checked::after {
-        content: "\2714";
-        font-size: 12px;
-        color: #fff;
-        position: relative;
-        top: -3px;
-        left: 1px;
+        &:checked {
+          border-color: #7082cc;
+          background-color: #7082cc;
+          border: 2px solid #7082cc;
+          &::after{
+            content: "\2714";
+            font-size: 12px;
+            color: #fff;
+            position: relative;
+            top: -3px;
+            left: 1px;
+          }
+          & ~ label {
+            text-decoration: line-through;
+            opacity: 0.4;
+          }
+        }
       }
       label {
         border-bottom: 1px solid #ffffff1a;
@@ -286,13 +245,16 @@ div.content {
 }
 
 div.footer {
+  display: grid;
+  grid-template-columns: auto 50px;
+  grid-template-rows: auto;
+  border-top: 1px solid #ffffff1a;
   div.create-date {
     height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   div.delete {
     display: flex;
     justify-content: center;
@@ -305,9 +267,4 @@ div.footer {
       }
     }
   }
-
-  display: grid;
-  grid-template-columns: auto 50px;
-  grid-template-rows: auto;
-  border-top: 1px solid #ffffff1a;
 }
