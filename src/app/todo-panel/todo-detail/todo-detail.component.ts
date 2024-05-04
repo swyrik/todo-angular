@@ -5,11 +5,12 @@ import { TaskService } from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import Step from '../../Types/step.model';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-todo-detail',
   standalone: true,
-  imports: [ DatePipe, FormsModule],
+  imports: [ DatePipe, FormsModule, FooterComponent],
   templateUrl: './todo-detail.component.html',
   styles: ['div.main { display: grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px; color: white; font-family: \'noto sans display\', \'Courier New\', Courier, monospace;font-size: smaller; height: 100vh;  }'],
   styleUrl: './todo-detail.component.scss'
@@ -79,11 +80,6 @@ export class TodoDetailComponent {
       }
       this.toggleAddStepFlag = false;
     }
-  }
-
-  deleteTask($event : any) {
-    this.taskService.deleteTaskInTaskList(this.task.id);
-    this.taskService.getShowTaskDetailsSubject().next({task: this.task, action: "delete"});
   }
 
 }

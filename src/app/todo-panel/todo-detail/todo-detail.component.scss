@@ -212,22 +212,3 @@ div.content {
     }
   }
 }
-
-div.footer {
-  display: grid;
-  grid-template-columns: auto 50px;
-  grid-template-rows: auto;
-  border-top: 1px solid #ffffff1a;
-  div.create-date {
-    @include center-flex();
-  }
-  div.delete {
-    @include center-flex();
-    cursor: pointer;
-    span {
-      &:active {
-        opacity: 0.5;
-      }
-    }
-  }
-}

@@ -37,15 +37,8 @@
       <textarea name="description" placeholder="Add a note" id="description" [(ngModel)]="task.description" cols="30" rows="5"></textarea>
     </div>
   </div>
-  <div class="footer">
-    <div class="create-date">
-      Created on {{task.date | date:'fullDate'}}
-    </div>
-    <div class="delete" (click)="deleteTask($event)">
-      <span class="material-symbols-outlined">
-        delete
-      </span>
-    </div>
+  <div style="display: flex; justify-content: center; align-items:  center; border-top: 1px solid #ffffff1a;">
+    <app-footer style="width: 100%;" [task]="task"></app-footer>
   </div>
 </div>
 }
