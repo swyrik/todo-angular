@@ -107,25 +107,17 @@ div.content {
     label{
       padding: 1em;
     }
-
-    input[type="date"], input[type="text"] {
+    input[type="date"] {
       color-scheme: dark;
       background-color: #141414;
       color: white;
-      border: none;
       width: 100%;
       padding: 1em;
       font-family: 'noto sans display', 'Courier New', Courier, monospace;
       border: 1px solid transparent;
       &:focus {
         outline: none;
-        color: white;
-        border: 1px solid #ffffff1a;
       }
-    }
-
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      display:block;
     }
   }
 
@@ -174,7 +166,6 @@ div.content {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        background-color: red;
         border-radius: 50%;
         cursor: pointer;
         background-color: #141414;
@@ -189,7 +180,6 @@ div.content {
           border-top: 1px solid #ffffff1a;
         }
         &:checked {
-          border-color: #7082cc;
           background-color: #7082cc;
           border: 2px solid #7082cc;
           &::after{
