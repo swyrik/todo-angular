@@ -13,10 +13,7 @@
     </div>
     <div class="steps">
       @for(step of task.steps; track $index){
-        <div class="step">
-          <input #stepDone type="checkbox" class="step-done" (change)="stepDoneTD($event, step)" [checked]="step.done" />
-          <label for="">{{step.name}}</label>
-        </div>
+        <app-step [step]="step"></app-step>
       }
       @if(!toggleAddStepFlag){
         <div class="add-step-span" (click)="toggleAddStep($event)">

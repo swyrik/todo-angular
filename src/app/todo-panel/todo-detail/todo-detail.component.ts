@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import Step from '../../Types/step.model';
 import { FooterComponent } from './footer/footer.component';
+import { StepComponent } from './step/step.component';
+import { StepService } from '../../services/step.service';
 
 @Component({
   selector: 'app-todo-detail',
   standalone: true,
-  imports: [ DatePipe, FormsModule, FooterComponent],
+  imports: [ DatePipe, FormsModule, FooterComponent, StepComponent],
   templateUrl: './todo-detail.component.html',
   styles: ['div.main { display: grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px; color: white; font-family: \'noto sans display\', \'Courier New\', Courier, monospace;font-size: smaller; height: 100vh;  }'],
   styleUrl: './todo-detail.component.scss'
@@ -30,7 +32,13 @@ export class TodoDetailComponent {
   @ViewChild('stepDone')
   stepDoneField!: ElementRef<HTMLInputElement>;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private stepService: StepService) {
+    this.stepService.getStepSubject().subscribe(stepAction => {
+      if (stepAction.action === "delete"){
+        this.deleteStepFromTask(stepAction.step.id);
+      }
+    });
+  }
 
   closeTodoDetail($event: MouseEvent) {
     this.taskService.getShowTaskDetailsSubject().next({task: this.task, action: "hide"});
@@ -57,14 +65,6 @@ export class TodoDetailComponent {
     this.stepInputField!.nativeElement.focus();
   }
 
-  stepDoneTD($event: any, step: Step) {
-    if($event?.target?.checked){
-      step.done = true;
-    } else {
-      step.done = false;
-    }
-  }
-
   @HostListener('window:keydown.esc', ['$event'])
   handleKeyDownEsc(event: KeyboardEvent) {
     this.toggleAddStepFlag = false;
@@ -82,4 +82,8 @@ export class TodoDetailComponent {
     }
   }
 
+  deleteStepFromTask(id: string) {
+    this.task.steps = this.task.steps?.filter(step => step.id != id);
+  }
 }
+
