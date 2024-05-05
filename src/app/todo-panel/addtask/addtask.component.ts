@@ -18,6 +18,9 @@ export class AddtaskComponent {
   taskList!: TaskList;
 
   constructor(private taskService: TaskService){
+    this.taskService.getAddTaskInTaskListSubject().subscribe(task => {
+      this.taskList.Tasks.push(task);
+    })
   }
 
   ngOnInit(): void {
@@ -27,7 +30,7 @@ export class AddtaskComponent {
   toggleAddTask(event: any){
     if(this.taskList.Tasks.length === 0 && this.taskList.id == "") return;
     this.toggleAddTaskFlag = true;
-    this.newTaskInput!.nativeElement.focus();
+    this.newTaskInput?.nativeElement.focus();
   }
 
   @HostListener('window:keydown.esc', ['$event'])

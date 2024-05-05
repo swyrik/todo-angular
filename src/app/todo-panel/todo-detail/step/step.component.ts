@@ -2,6 +2,8 @@ import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/
 import Step from '../../../Types/step.model';
 import { TaskService } from '../../../services/task.service';
 import { StepService } from '../../../services/step.service';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-step',
@@ -62,7 +64,9 @@ export class StepComponent {
   }
 
   promoteToTask($event: MouseEvent,arg1: Step) {
-
+    this.closeStepContextMenu();
+    this.deleteStep();
+    this.taskService.getAddTaskInTaskListSubject().next({name: this.step.name!, done: false,important: false, id: uuidv4(), date: new Date()})
   }
 
   deleteStep() {

@@ -62,7 +62,7 @@ export class TodoDetailComponent {
 
   toggleAddStep(event: any){
     this.toggleAddStepFlag = true;
-    this.stepInputField!.nativeElement.focus();
+    this.stepInputField?.nativeElement.focus();
   }
 
   @HostListener('window:keydown.esc', ['$event'])
@@ -72,7 +72,7 @@ export class TodoDetailComponent {
 
   @HostListener('window:keydown.enter', ['$event'])
   handleKeyDownEnter(event: KeyboardEvent) {
-    if(this.stepInputField.nativeElement.value != ''){
+    if(this.stepInputField && this.stepInputField.nativeElement.value != ''){
       if(typeof this.task.steps == "undefined") {
         this.task.steps = [{id: uuidv4(), name: this.stepInputField.nativeElement.value,  done: false}];
       } else {
