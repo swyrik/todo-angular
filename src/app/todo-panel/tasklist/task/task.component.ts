@@ -58,7 +58,7 @@ export class TaskComponent {
 
   menuTaskImportant(checked: boolean) {
     this.closeTaskContextMenu();
-    this.taskInput.nativeElement.checked = !checked;
+    this.taskInputImportant.nativeElement.checked = !checked;
     this.task.important = !checked;
   }
 
