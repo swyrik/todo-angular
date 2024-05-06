@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import Task from '../../Types/task.model';
 import TaskList from '../../Types/tasklist.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-addtask',
@@ -11,20 +12,27 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './addtask.component.html',
   styleUrl: './addtask.component.scss'
 })
-export class AddtaskComponent {
+export class AddtaskComponent implements OnDestroy{
 
   toggleAddTaskFlag : boolean = false;
   @ViewChild('newtask', { static: false }) newTaskInput!: ElementRef;
   taskList!: TaskList;
+  subs: Subscription[] = [];
 
   constructor(private taskService: TaskService){
-    this.taskService.getAddTaskInTaskListSubject().subscribe(task => {
+    const addTaskInTaskListSubscription = this.taskService.getAddTaskInTaskListSubject().subscribe(task => {
       this.taskList.Tasks.push(task);
     })
+    this.subs.push(addTaskInTaskListSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   ngOnInit(): void {
-    this.taskService.getTaskListSubject().subscribe((tasks) => {this.taskList=tasks;});
+    const taskListSubscription = this.taskService.getTaskListSubject().subscribe((tasks) => {this.taskList=tasks;});
+    this.subs.push(taskListSubscription);
   }
 
   toggleAddTask(event: any){

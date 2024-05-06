@@ -10,6 +10,7 @@ export class TaskService {
 
   tasklistitems: TaskList[] = [];
   private taskListSubject = new Subject<TaskList>();
+  private hideTodoDetail = new Subject<String>();
   private addTaskInTaskListSubject = new Subject<Task>();
   private renderSidePanelSubject = new  Subject<TaskList[]>();
   private showTaskDetailsSubject = new Subject<{task : Task, action: string}>();
@@ -20,6 +21,10 @@ export class TaskService {
 
   renderTaskList(taskList: TaskList){
     this.taskListSubject.next(taskList);
+  }
+
+  getHideTodoDetail() {
+    return this.hideTodoDetail;
   }
 
   getAddTaskInTaskListSubject(){

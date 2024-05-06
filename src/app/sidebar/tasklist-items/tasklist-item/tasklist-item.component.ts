@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, Output, ViewChild, EventEmitter, HostListener } from '@angular/core';
+import { Component, ElementRef, Input, Output, ViewChild, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import TaskList from '../../../Types/tasklist.model';
 import { TitleCasePipe } from '@angular/common';
 import { TaskService } from '../../../services/task.service';
 import { TaskcontextmenuService } from '../../../services/taskcontextmenu.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tasklist-item',
@@ -12,7 +13,7 @@ import { TaskcontextmenuService } from '../../../services/taskcontextmenu.servic
   styleUrl: './tasklist-item.component.scss'
 })
 
-export class TasklistItemComponent{
+export class TasklistItemComponent implements OnDestroy{
 
   @Input() tasklist!: TaskList;
   @Input() index!: number;
@@ -21,13 +22,19 @@ export class TasklistItemComponent{
   @Output() clicked = new EventEmitter<number>();
   @Output() activeItemDeleted = new EventEmitter<number>();
   @Input() activeClass! : any;
+  subs: Subscription[] = [];
 
   constructor(private taskContextMenuService: TaskcontextmenuService,
     private taskService: TaskService
   ){
-    this.taskContextMenuService.getContextMenuSubject().subscribe(() => {
+    const contextMenuSubscription = this.taskContextMenuService.getContextMenuSubject().subscribe(() => {
       this.closeTaskListContextMenu();
     });
+    this.subs.push(contextMenuSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   displayTaskListItem(arg0: TaskList) {

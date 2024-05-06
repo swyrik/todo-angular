@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, ViewChild } from '@angular/core';
 import Step from '../../../Types/step.model';
 import { TaskService } from '../../../services/task.service';
 import { StepService } from '../../../services/step.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './step.component.html',
   styleUrl: './step.component.scss'
 })
-export class StepComponent {
+export class StepComponent implements OnDestroy{
 
   @Input()
   public step! : Step;
@@ -23,10 +24,17 @@ export class StepComponent {
   @ViewChild('stepDone')
   stepInput! : ElementRef<HTMLInputElement>;
 
+  subs: Subscription[] = [];
+
   constructor(private taskService: TaskService, private stepService: StepService) {
-    this.stepService.getContextMenuSubject().subscribe(() => {
+    const contextMenuSubscription = this.stepService.getContextMenuSubject().subscribe(() => {
       this.closeStepContextMenu();
     });
+    this.subs.push(contextMenuSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   @HostListener('window:keydown.esc', ['$event'])

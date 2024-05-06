@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { TaskService } from '../../services/task.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-taskheader',
@@ -9,20 +10,26 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './taskheader.component.html',
   styleUrl: './taskheader.component.scss'
 })
-export class TaskheaderComponent implements OnInit{
+export class TaskheaderComponent implements OnInit, OnDestroy{
 
   title: string = "no title";
   id!: string;
   toggleHeaderRenameFlag: boolean = false;
+  subs: Subscription[] = [];
 
   constructor(private taskService: TaskService){
   }
 
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.taskService.getTaskListSubject().subscribe((tasks) => {
+    const taskListSubscription = this.taskService.getTaskListSubject().subscribe((tasks) => {
       this.title=tasks.name;
       this.id = tasks.id;
     });
+    this.subs.push(taskListSubscription);
   }
 
   @HostListener('window:keydown.esc', ['$event'])

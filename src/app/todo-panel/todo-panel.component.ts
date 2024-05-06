@@ -1,10 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { TaskheaderComponent } from "./taskheader/taskheader.component";
 import { TasklistComponent } from "./tasklist/tasklist.component";
 import { AddtaskComponent } from "./addtask/addtask.component";
 import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 import { TaskService } from '../services/task.service';
 import Task from '../Types/task.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-todo-panel',
@@ -13,7 +14,7 @@ import Task from '../Types/task.model';
     styleUrl: './todo-panel.component.scss',
     imports: [TaskheaderComponent, TasklistComponent, AddtaskComponent, TodoDetailComponent]
 })
-export class TodoPanelComponent {
+export class TodoPanelComponent implements OnDestroy{
 
   @ViewChild('todoDetail') taskInput!: ElementRef<HTMLDivElement>;
 
@@ -24,8 +25,10 @@ export class TodoPanelComponent {
 
   task!: Task;
 
+  subs: Subscription[] = [];
+
   constructor(private taskService: TaskService){
-    this.taskService.getShowTaskDetailsSubject().subscribe(taskAction => {
+    const showTaskDetailsSubscription = this.taskService.getShowTaskDetailsSubject().subscribe(taskAction => {
 
       if(taskAction.action == "show"){
         this.todoDetailClass = "todo-detail active";
@@ -37,6 +40,11 @@ export class TodoPanelComponent {
         this.taskListComponent.deleteTask(taskAction.task.id);
       }
     });
+    this.subs.push(showTaskDetailsSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
 }

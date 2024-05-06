@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, Input, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Output, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
 import Task from '../../../Types/task.model';
 import { JsonPipe } from '@angular/common';
 import { TaskcontextmenuService } from '../../../services/taskcontextmenu.service';
 import { TaskService } from '../../../services/task.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -13,7 +14,7 @@ import { TaskService } from '../../../services/task.service';
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
-export class TaskComponent {
+export class TaskComponent implements OnDestroy{
 
   @Input() task!: Task;
   @Input() taskListId!: String;
@@ -21,13 +22,19 @@ export class TaskComponent {
   @ViewChild('taskContextMenu') taskContextMenuEle!: ElementRef<HTMLDivElement>;
   @ViewChild('taskInput') taskInput!: ElementRef<HTMLInputElement>;
   @ViewChild('taskInputImportant') taskInputImportant!: ElementRef<HTMLInputElement>;
+  subs: Subscription[] = [];
 
   constructor(private taskContextMenuService: TaskcontextmenuService,
     private taskService: TaskService
   ){
-    this.taskContextMenuService.getContextMenuSubject().subscribe(() => {
+    const contextMenuSubscription = this.taskContextMenuService.getContextMenuSubject().subscribe(() => {
       this.closeTaskContextMenu();
     });
+    this.subs.push(contextMenuSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   closeTaskContextMenu() {
@@ -40,6 +47,8 @@ export class TaskComponent {
     this.closeTaskContextMenu();
     this.taskService.deleteTaskInTaskList(this.task.id, this.taskListId);
     this.deleteTaskId.emit(this.task.id);
+    // hide todo-detail component
+    this.taskService.getHideTodoDetail().next(this.task.id);
   }
 
   menuTaskComplete(checked: boolean) {

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import TaskList from '../../Types/tasklist.model';
 import { TasklistItemComponent } from "./tasklist-item/tasklist-item.component";
 import { TaskService } from '../../services/task.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-tasklist-items',
@@ -11,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
     styleUrl: './tasklist-items.component.scss',
     imports: [TasklistItemComponent]
 })
-export class TasklistItemsComponent  implements OnInit, AfterViewInit{
+export class TasklistItemsComponent  implements OnInit, AfterViewInit, OnDestroy{
 
     tasklistitems: TaskList[] = [
       {
@@ -73,14 +74,21 @@ export class TasklistItemsComponent  implements OnInit, AfterViewInit{
   activeItem! : number;
   @ViewChildren(TasklistItemComponent) taskListItemsComponent!: QueryList<any>;
 
+  subs: Subscription[] = [];
+
 
   constructor(private taskService: TaskService, private eleRef: ElementRef){
-    this.taskService
+    const renderSidePanleSubscription = this.taskService
     .getRenderSidePanelSubject()
     .subscribe(taskListItems => {
       this.tasklistitems = taskListItems;
       this.taskService.setTaskListItems(this.tasklistitems);
     });
+    this.subs.push(renderSidePanleSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe())
   }
 
   ngOnInit(): void {

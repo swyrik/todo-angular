@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, ViewChild } from '@angular/core';
 import Task from '../../Types/task.model';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { TaskService } from '../../services/task.service';
@@ -8,6 +8,7 @@ import Step from '../../Types/step.model';
 import { FooterComponent } from './footer/footer.component';
 import { StepComponent } from './step/step.component';
 import { StepService } from '../../services/step.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-detail',
@@ -17,7 +18,7 @@ import { StepService } from '../../services/step.service';
   styles: ['div.main { display: grid; grid-template-columns: 1fr; grid-template-rows: 50px auto 50px; color: white; font-family: \'noto sans display\', \'Courier New\', Courier, monospace;font-size: smaller; height: 100vh;  }'],
   styleUrl: './todo-detail.component.scss'
 })
-export class TodoDetailComponent {
+export class TodoDetailComponent implements OnDestroy{
 
   @Input()
   public task!: Task;
@@ -32,15 +33,31 @@ export class TodoDetailComponent {
   @ViewChild('stepDone')
   stepDoneField!: ElementRef<HTMLInputElement>;
 
+  subs: Subscription[] = [];
+
   constructor(private taskService: TaskService, private stepService: StepService) {
-    this.stepService.getStepSubject().subscribe(stepAction => {
-      if (stepAction.action === "delete"){
+    const stepServiceSubscription = this.stepService.getStepSubject().subscribe(stepAction => {
+      if (stepAction.action === "delete") {
         this.deleteStepFromTask(stepAction.step.id);
       }
     });
+
+    // hide todo detail if the active item is deleted in tasklist.
+    const hideTodoDetailSubscription = this.taskService.getHideTodoDetail().subscribe(id => {
+      if(id == this.task.id){
+        this.closeTodoDetail();
+      }
+    })
+
+    this.subs.push(stepServiceSubscription);
+    this.subs.push(hideTodoDetailSubscription);
   }
 
-  closeTodoDetail($event: MouseEvent) {
+  ngOnDestroy(): void {
+    this.subs.forEach(sub =>sub.unsubscribe());
+  }
+
+  closeTodoDetail($event?: MouseEvent) {
     this.taskService.getShowTaskDetailsSubject().next({task: this.task, action: "hide"});
   }
 
